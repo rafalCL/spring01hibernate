@@ -6,11 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pl.coderslab.spring01hibernate.entity.Author;
 import pl.coderslab.spring01hibernate.entity.Book;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Component
 @Transactional
@@ -36,6 +39,10 @@ public class BookDao {
         return entityManager.find(Book.class, id);
     }
 
-
+    public List<Book> readAll() {
+        Query q = this.entityManager
+                .createQuery("SELECT e FROM Book e");
+        return q.getResultList();
+    }
 
 }

@@ -49,7 +49,12 @@ public class BookController {
     public String addBookFormPost(@ModelAttribute Book book){
         this.bookDao.create(book);
 
-        return "ok";
+        return "redirect:list";
+    }
+
+    @GetMapping("/list")
+    public String list(){
+        return "book/list";
     }
 
     @ModelAttribute("publishers")
@@ -60,5 +65,10 @@ public class BookController {
     @ModelAttribute("authors")
     public List<Author> authors(){
         return this.authorDao.readAll();
+    }
+
+    @ModelAttribute("books")
+    public List<Book> books(){
+        return this.bookDao.readAll();
     }
 }

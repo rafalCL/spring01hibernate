@@ -15,7 +15,7 @@ isELIgnored="false" %>
 <body>
 <ul>
     <c:forEach var="book" items="${books}">
-        <li>${book.title}</li>
+        <li>${book.title} <a href="<c:url value='/book/edit/${book.id}'/>">Edit</a> </li>
     </c:forEach>
 </ul>
 </body>

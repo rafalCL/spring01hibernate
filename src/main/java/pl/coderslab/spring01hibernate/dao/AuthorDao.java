@@ -1,6 +1,8 @@
 package pl.coderslab.spring01hibernate.dao;
 
 import org.springframework.stereotype.Component;
+import pl.coderslab.spring01hibernate.entity.Author;
+import pl.coderslab.spring01hibernate.entity.Book;
 import pl.coderslab.spring01hibernate.entity.Publisher;
 
 import javax.persistence.EntityManager;
@@ -11,31 +13,33 @@ import java.util.List;
 
 @Component
 @Transactional
-public class PublisherDao {
+public class AuthorDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void create(Publisher entity){
+    public void create(Author entity){
         entityManager.persist(entity);
     }
 
-    public Publisher read(long id){
-        return entityManager.find(Publisher.class, id);
-    }
-
-    public void update(Publisher entity){
+    public void editBook(Author entity){
         entityManager.merge(entity);
     }
 
-    public void delete(Publisher entity){
+    public void removeBook(Author entity){
         entityManager.remove(
                 entityManager.contains(entity) ? entity : entityManager.merge(entity));
     }
 
-    public List<Publisher> readAll() {
+    public Author read(long id){
+
+        return entityManager.find(Author.class, id);
+    }
+
+    public List<Author> readAll() {
         Query q = this.entityManager
-                .createQuery("SELECT p FROM Publisher p");
+                .createQuery("SELECT e FROM Author e");
         return q.getResultList();
     }
+
 }

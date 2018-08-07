@@ -1,6 +1,7 @@
 package pl.coderslab.spring01hibernate.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -9,10 +10,14 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String title;
-    private String author;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Author> authors;
     private int rating;
     @Column(columnDefinition = "TEXT")
     private String description;
+
+    @ManyToOne
+    private Publisher publisher;
 
     public Book(){
 
@@ -34,12 +39,12 @@ public class Book {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
+    public List<Author> getAuthors() {
+        return authors;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthors(List<Author> author) {
+        this.authors = author;
     }
 
     public int getRating() {
@@ -56,5 +61,13 @@ public class Book {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 }

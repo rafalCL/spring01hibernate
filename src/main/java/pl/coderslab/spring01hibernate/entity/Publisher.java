@@ -15,7 +15,7 @@ public class Publisher {
 
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany//(fetch = FetchType.EAGER)
     private List<Book> books = new ArrayList<>();
 
     public Publisher() {

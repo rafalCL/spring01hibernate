@@ -1,6 +1,11 @@
 package pl.coderslab.spring01hibernate.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -9,15 +14,34 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Size(min = 5, message = "Tytul musi zawierac co najmniej 5 znakow")
     private String title;
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Author> authors;
+    @Size(min = 1)
+    private List<Author> authors = new ArrayList<>();
+
+
+    // below field is only for validation test purposes
+    @Transient
+    @NotNull
+    public Author author;
+
+    @Min(1)
+    @Max(10)
     private int rating;
+
     @Column(columnDefinition = "TEXT")
+    @Size(max = 600)
     private String description;
 
     @ManyToOne
+    @NotNull
     private Publisher publisher;
+
+    @Min(2)
+    private int pages;
+
 
     public Book(){
 
@@ -69,5 +93,13 @@ public class Book {
 
     public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
+    }
+
+    public int getPages() {
+        return pages;
+    }
+
+    public void setPages(int pages) {
+        this.pages = pages;
     }
 }

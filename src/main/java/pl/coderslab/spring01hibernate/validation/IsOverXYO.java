@@ -12,8 +12,8 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface IsOverXYO {
-    int value();
-    String message() default "{Must be over X years old}";
+    int value() default 18;
+    String message() default "Must be over X years old";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

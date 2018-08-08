@@ -82,9 +82,9 @@ public class ValidationController {
 
     @GetMapping("/overxyo")
     @ResponseBody
-    public String overXYOOk() {
+    public String overXYO() {
         ValidationTest test = new ValidationTest();
-        test.yearOfBirth = 2005;
+        test.yearOfBirth = 2015;
 
         Set<ConstraintViolation<ValidationTest>> violations
                 = this.validator.validate(test);

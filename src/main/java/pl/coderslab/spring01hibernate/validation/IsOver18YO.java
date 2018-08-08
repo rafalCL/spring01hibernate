@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface IsOver18YO {
-    String message() default "{Must be over 18 years old}";
+    String message() default "Must be over 18 years old";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

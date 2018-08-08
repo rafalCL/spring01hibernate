@@ -15,6 +15,7 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotNull(message = "Tytul musi zawierac co najmniej 5 znakow")
     @Size(min = 5, message = "Tytul musi zawierac co najmniej 5 znakow")
     private String title;
     @ManyToMany(fetch = FetchType.EAGER)
@@ -23,9 +24,9 @@ public class Book {
 
 
     // below field is only for validation test purposes
-    @Transient
-    @NotNull
-    public Author author;
+//    @Transient
+//    @NotNull
+//    public Author author;
 
     @Min(1)
     @Max(10)

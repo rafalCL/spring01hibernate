@@ -3,6 +3,7 @@ package pl.coderslab.spring01hibernate.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.spring01hibernate.dao.AuthorDao;
 import pl.coderslab.spring01hibernate.dao.BookDao;
@@ -11,6 +12,7 @@ import pl.coderslab.spring01hibernate.entity.Author;
 import pl.coderslab.spring01hibernate.entity.Book;
 import pl.coderslab.spring01hibernate.entity.Publisher;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -51,6 +53,37 @@ public class BookController {
 
         return "redirect:list";
     }
+
+
+
+    @GetMapping("/addformv")
+    public String addBookFormValidated(Model model){
+        model.addAttribute("book", new Book());
+
+        return "book/addFormValidated";
+    }
+
+    @PostMapping("/addformv")
+    public String addBookFormValidatedPost(@Valid Book book,
+                                           BindingResult result){
+        if(result.hasErrors()){
+            return "book/addFormValidated";
+        }
+        // if validation passed
+        this.bookDao.create(book);
+
+        return "redirect:list";
+    }
+
+
+
+
+
+
+
+
+
+
 
     @GetMapping("/list")
     public String list(){

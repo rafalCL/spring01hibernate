@@ -1,5 +1,7 @@
 package pl.coderslab.spring01hibernate.entity;
 
+import pl.coderslab.spring01hibernate.validation.IsOver18YO;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +14,8 @@ public class Author {
     private long id;
     private String firstName;
     private String lastName;
+    @IsOver18YO
+    private int yearOfBirth;
 
     public Author(){
 
@@ -48,5 +52,13 @@ public class Author {
 
     public String getFullName(){
         return this.firstName + " " + this.lastName;
+    }
+
+    public int getYearOfBirth() {
+        return yearOfBirth;
+    }
+
+    public void setYearOfBirth(int yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
     }
 }

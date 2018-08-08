@@ -1,10 +1,13 @@
 package pl.coderslab.spring01hibernate.entity;
 
+import pl.coderslab.spring01hibernate.validation.BookProposition;
+
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.groups.Default;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +18,10 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull(message = "Tytul musi zawierac co najmniej 5 znakow")
-    @Size(min = 5, message = "Tytul musi zawierac co najmniej 5 znakow")
+    @NotNull(message = "Tytul musi zawierac co najmniej 5 znakow",
+             groups = {BookProposition.class, Default.class})
+    @Size(min = 5, message = "Tytul musi zawierac co najmniej 5 znakow",
+          groups = {BookProposition.class, Default.class})
     private String title;
     @ManyToMany(fetch = FetchType.EAGER)
     @Size(min = 1)
@@ -33,7 +38,7 @@ public class Book {
     private int rating;
 
     @Column(columnDefinition = "TEXT")
-    @Size(max = 600)
+    @Size(max = 600, groups = {BookProposition.class, Default.class})
     private String description;
 
     @ManyToOne
@@ -43,6 +48,7 @@ public class Book {
     @Min(2)
     private int pages;
 
+    private boolean proposition=false;
 
     public Book(){
 
@@ -102,5 +108,13 @@ public class Book {
 
     public void setPages(int pages) {
         this.pages = pages;
+    }
+
+    public boolean isProposition() {
+        return proposition;
+    }
+
+    public void setProposition(boolean propositon) {
+        this.proposition = propositon;
     }
 }

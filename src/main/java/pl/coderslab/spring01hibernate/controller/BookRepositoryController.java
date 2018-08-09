@@ -77,11 +77,34 @@ public class BookRepositoryController {
         //3
         List<Book> books3 = this.br.findAllWhereTitleContains("propozycja");
         List<Book> allBooks = new ArrayList<>();
+
         allBooks.addAll(books);
         allBooks.addAll(books2);
         allBooks.addAll(books3);
 
         m.addAttribute("books", allBooks);
+
+        return "book/list";
+    }
+
+    @GetMapping("/list/jpqltest2")
+    public String listJpqlTest2(Model m){
+        Category category = this.cr.findOneByName("proza");
+        Book book1 = this.br.findFirstByCategoryOrderByTitle(category);
+        Book book2 = this.br.findFirstByCategoryOrderByTitleDesc(category);
+        List<Book> allBooks = new ArrayList<>();
+
+        allBooks.add(book1);
+        allBooks.add(book2);
+
+        m.addAttribute("books", allBooks);
+
+        return "book/list";
+    }
+
+    @GetMapping("/resetrating/{newRating}")
+    public String resetRating(@PathVariable int newRating){
+        this.br.resetRating(newRating);
 
         return "book/list";
     }

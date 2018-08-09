@@ -8,7 +8,8 @@ import pl.coderslab.spring01hibernate.entity.Category;
 
 import java.util.List;
 
-public interface BookRepository extends JpaRepository<Book, Long> {
+public interface BookRepository extends JpaRepository<Book, Long>,
+                                        ResetRatingInterface {
     List<Book> findAllByTitle(String title);
     List<Book> findAllByCategory(Category category);
     List<Book> findAllByCategoryId(long id);
@@ -19,4 +20,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> findAllByJpqlCategory(@Param("categ") Category cat);
     @Query("SELECT b FROM Book b WHERE b.title LIKE %:part%")
     List<Book> findAllWhereTitleContains(@Param("part") String part);
+
+    Book findFirstByCategoryOrderByTitle(Category c);
+    Book findFirstByCategoryOrderByTitleDesc(Category c);
 }

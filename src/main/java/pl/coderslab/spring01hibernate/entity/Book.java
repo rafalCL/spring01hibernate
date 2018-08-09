@@ -53,6 +53,9 @@ public class Book {
     @ManyToOne
     private Category category;
 
+    @ManyToOne
+    private Category category2;
+
     public Book(){
 
     }

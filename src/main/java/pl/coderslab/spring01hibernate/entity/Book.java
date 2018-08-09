@@ -50,6 +50,9 @@ public class Book {
 
     private boolean proposition=false;
 
+    @ManyToOne
+    private Category category;
+
     public Book(){
 
     }
@@ -116,5 +119,13 @@ public class Book {
 
     public void setProposition(boolean propositon) {
         this.proposition = propositon;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

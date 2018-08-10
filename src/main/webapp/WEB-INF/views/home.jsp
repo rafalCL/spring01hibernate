@@ -5,12 +5,18 @@
   Time: 10:53
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
-    <title>Hibernate App</title>
+
+    <%@ include file="security/jspf/head_config.jspf"%>
+
 </head>
 <body>
-<h1>Hibernate App</h1>
+<%@ include file="security/jspf/header.jspf"%>
+<%@ include file="security/jspf/main_menu.jspf"%>
+<p class='error'>${msg}</p>
+home
+<%@ include file="security/jspf/footer.jspf"%>
 </body>
 </html>
